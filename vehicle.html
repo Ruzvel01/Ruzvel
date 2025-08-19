@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Management - Vehicle Module</title>
+    <link rel="stylesheet" href="../style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .management-container {
+            padding: 2rem;
+            margin-top: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        
+        }
+
+        .vehicle-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+        }
+        
+        .vehicle-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vehicle-status {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-active {
+            border-left-color: var(--success-color);
+        }
+        
+        .status-maintenance {
+            border-left-color: var(--warning-color);
+        }
+        
+        .status-inactive {
+            border-left-color: var(--danger-color);
+        }
+        
+        .custom-search-box {
+            position: relative;
+        }
+        
+        .custom-search-box input {
+            padding-left: 2.5rem;
+            border-radius: 20px;
+        }
+        
+        .custom-search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        
+        .vehicle-spec {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .vehicle-spec i {
+            width: 24px;
+            text-align: center;
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .action-btn {
+            transition: all 0.2s ease;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .vehicle-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    
+   <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="sidebar-logo-text">Logistic 2</span>
+            </div>
+            <button class="toggle-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item ">
+                <a href="../main.html">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+                </a>
+            </div>
+      <div class="fleet">
+            <p>Fleet & Vehicle Management <p>
+            </div>
+            <div class="menu-item">
+                <i class="fa-solid fa-box"></i>
+                <span>Vehicle Reservation</span>
+            </div>
+            <div class="menu-item active">
+                <a href="vehicle management/vehicle.html">
+                    <i class="fa-solid fa-box"></i>
+                    <span>Vehicle Management</span>
+                </a>
+            
+</div>
+<div class="fleet">
+  <p>Vehicle Reseravation <br>and Dispatch<p>
+  </div>
+            <div class="menu-item">
+                <i class="fa-solid fa-box"></i>
+                <span>Dispatch</span>
+            </div>
+ <div class="menu-item">
+                <i class="fa-solid fa-box"></i>
+                <span>Shift & <br>Schedule Management</span>
+            </div>
+
+<div class="fleet">
+  <p>Transport Cost Analysis<p>
+  </div>
+           
+<div class="menu-item">
+                <i class="fa-solid fa-box"></i>
+                <span>Fuel Efficiency Reports</span>
+            </div>
+
+            <div class="menu-item">
+                <i class="fa-solid fa-box"></i>
+                <span>Fuel Tracking</span>
+            </div>
+            <div class="fleet">
+  <p>Drive And Trip Performance<p>
+  </div>
+   <div class="menu-item has-dropdown">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Trip Performance</span>
+    <i class="fas fa-chevron-down arrow"></i>
+    <div class="dropdown">
+        <a href="../Overview-tripperformance/overview.html" >Overview</a>
+        <a href="trip-performance/driver.html">Driver Performance</a>
+        <a href="trip-performance/vehicle.html">Vehicle Performance</a>
+    </div>
+</div>
+           
+            <div class="menu-item">
+                <i class="fa-solid fa-box"></i>
+                <span>Driver Management</span>
+            </div>
+
+            
+          <div class="menu-item has-dropdown">
+    <i class="fas fa-cog"></i>
+    <span>Settings</span>
+    <i class="fas fa-chevron-down arrow"></i>
+    <div class="dropdown">
+        <a href="settings/profile.html">Profile Settings</a>
+        <a href="settings/account.html">Account Settings</a>
+        <a href="settings/notifications.html">Notification Settings</a>
+    </div>
+</div>
+            <div class="menu-item" id="logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+  
+    <div class="container management-container">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h2 class="fw-bold">Vehicle Management</h2>
+                <p class="text-muted">Manage your fleet vehicles efficiently</p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVehicleModal">
+                    <i class="bi bi-plus"></i> Add New Vehicle
+                </button>
+            </div>
+        </div>
+        
+        <!-- Search and Filters -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-2">
+                <div class="custom-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" class="form-control" placeholder="Search vehicles..." id="vehicleSearch">
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="d-flex justify-content-end">
+                    <select class="form-select me-2" style="width: 120px;" id="statusFilter">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                    <select class="form-select" style="width: 140px;" id="typeFilter">
+                        <option value="all">All Types</option>
+                        <option value="car">Car</option>
+                        <option value="truck">Truck</option>
+                        <option value="van">Van</option>
+                        <option value="suv">SUV</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Vehicle List -->
+        <div class="row" id="vehicleList">
+            <!-- Vehicle cards will be populated here -->
+        </div>
+    </div>
+    
+    <!-- Add Vehicle Modal -->
+    <div class="modal fade" id="addVehicleModal" tabindex="-1" aria-labelledby="addVehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addVehicleModalLabel">Add New Vehicle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="vehicleForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="licensePlate" class="form-label">License Plate</label>
+                                <input type="text" class="form-control" id="licensePlate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="make" class="form-label">Make</label>
+                                <input type="text" class="form-control" id="make" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="model" class="form-label">Model</label>
+                                <input type="text" class="form-control" id="model" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="year" class="form-label">Year</label>
+                                <input type="number" class="form-control" id="year" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="type" class="form-label">Vehicle Type</label>
+                                <select class="form-select" id="type" required>
+                                    <option value="" selected disabled>Select</option>
+                                    <option value="car">Car</option>
+                                    <option value="truck">Truck</option>
+                                    <option value="van">Van</option>
+                                    <option value="suv">SUV</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="odometer" class="form-label">Odometer (km)</label>
+                                <input type="number" class="form-control" id="odometer" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" id="status" required>
+                                    <option value="active">Active</option>
+                                    <option value="maintenance">Maintenance</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Notes</label>
+                            <textarea class="form-control" id="notes" rows="3"></textarea>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="vin" class="form-label">VIN</label>
+                                <input type="text" class="form-control" id="vin">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="color" class="form-label">Color</label>
+                                <input type="text" class="form-control" id="color">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="vehicleImage" class="form-label">Vehicle Image</label>
+                            <input class="form-control" type="file" id="vehicleImage">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveVehicle">Save Vehicle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Vehicle Modal -->
+    <div class="modal fade" id="editVehicleModal" tabindex="-1" aria-labelledby="editVehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editVehicleModalLabel">Edit Vehicle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editVehicleForm">
+                        <!-- Form fields same as add vehicle form, will be populated by JS -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="updateVehicle">Update Vehicle</button>
+                    <button type="button" class="btn btn-danger" id="deleteVehicle">Delete Vehicle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Sample vehicle data
+        const vehicles = [
+            {
+                id: 1,
+                licensePlate: "ABC123",
+                make: "Ford",
+                model: "Transit",
+                year: 2022,
+                type: "van",
+                odometer: 23560,
+                status: "active",
+                vin: "1FTNE24AXXDB12345",
+                color: "White",
+                notes: "Regular maintenance done last month",
+                imageUrl: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/596e4cc8-0078-47c0-8b13-b20409c169e3.png"
+            },
+            {
+                id: 2,
+                licensePlate: "XYZ789",
+                make: "Toyota",
+                model: "Camry",
+                year: 2021,
+                type: "car",
+                odometer: 42330,
+                status: "active",
+                vin: "4T1B11HKXJU123456",
+                color: "Silver",
+                notes: "Needs oil change soon",
+                imageUrl: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f74c8c51-bdb3-4f63-82c9-4537d98c56b3.png"
+            },
+            {
+                id: 3,
+                licensePlate: "TRK001",
+                make: "Chevrolet",
+                model: "Silverado",
+                year: 2020,
+                type: "truck",
+                odometer: 58720,
+                status: "maintenance",
+                vin: "3GCUKRECXLG123456",
+                color: "Black",
+                notes: "In for transmission service",
+                imageUrl: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4ff7c7db-7a0d-46f3-a46d-73228177cad6.png"
+            },
+            {
+                id: 4,
+                licensePlate: "SUV456",
+                make: "Honda",
+                model: "CR-V",
+                year: 2023,
+                type: "suv",
+                odometer: 7350,
+                status: "inactive",
+                vin: "5J6RE4H43RL123456",
+                color: "Blue",
+                notes: "Waiting for new tires",
+                imageUrl: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4016019c-8f68-47f0-bca9-38f772f6d99e.png"
+            },
+              {
+                id: 5,
+                licensePlate: "MOT456",
+                make: "Honda",
+                model: "CLICK150",
+                year: 2023,
+                type: "motor",
+                odometer: 3000,
+                status: "active",
+                vin: "5J6RE4H43RL123456",
+                color: "red",
+                notes: "Waiting for new andeng",
+                imageUrl: "../pictures/motor.jpg"
+            },
+        ];
+        
+        // DOM Elements
+        const vehicleList = document.getElementById('vehicleList');
+        const vehicleSearch = document.getElementById('vehicleSearch');
+        const statusFilter = document.getElementById('statusFilter');
+        const typeFilter = document.getElementById('typeFilter');
+        const saveVehicleBtn = document.getElementById('saveVehicle');
+        const updateVehicleBtn = document.getElementById('updateVehicle');
+        const deleteVehicleBtn = document.getElementById('deleteVehicle');
+        
+        // Current vehicle being edited
+        let currentEditingVehicle = null;
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderVehicles(vehicles);
+            
+            // Setup event listeners
+            vehicleSearch.addEventListener('input', filterVehicles);
+            statusFilter.addEventListener('change', filterVehicles);
+            typeFilter.addEventListener('change', filterVehicles);
+            saveVehicleBtn.addEventListener('click', saveVehicle);
+            updateVehicleBtn.addEventListener('click', updateVehicle);
+            deleteVehicleBtn.addEventListener('click', deleteVehicle);
+        });
+        
+        // Render vehicles
+        function renderVehicles(vehiclesToRender) {
+            vehicleList.innerHTML = '';
+            
+            if (vehiclesToRender.length === 0) {
+                vehicleList.innerHTML = '<div class="col-12 text-center py-4"><p class="text-muted">No vehicles found matching your criteria</p></div>';
+                return;
+            }
+            
+            vehiclesToRender.forEach(vehicle => {
+                const statusClass = `status-${vehicle.status}`;
+                const statusText = vehicle.status.charAt(0).toUpperCase() + vehicle.status.slice(1);
+                
+                const vehicleCard = document.createElement('div');
+                vehicleCard.className = `col-md-6 col-lg-4 col-xl-3`;
+                vehicleCard.innerHTML = `
+                    <div class="card vehicle-card ${statusClass} h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="badge bg-${getStatusColor(vehicle.status)} text-white vehicle-status">${statusText}</span>
+                                <span class="badge bg-secondary">${vehicle.type.toUpperCase()}</span>
+                            </div>
+                            
+                            <img src="${vehicle.imageUrl}" alt="${vehicle.make} ${vehicle.model} - ${vehicle.color} color - ${vehicle.licensePlate} plate" class="vehicle-image mb-3">
+                            
+                            <h5 class="card-title">${vehicle.make} ${vehicle.model} (${vehicle.year})</h5>
+                            <p class="card-text vehicle-spec">
+                                <i class="bi bi-car-front"></i> ${vehicle.licensePlate}<br>
+                                <i class="bi bi-speedometer2"></i> ${vehicle.odometer.toLocaleString()} km<br>
+                                <i class="bi bi-upc-scan"></i> ${vehicle.vin || 'N/A'}<br>
+                                <i class="bi bi-palette"></i> ${vehicle.color || 'N/A'}
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <div class="d-flex justify-content-end">
+                                <span class="action-btn text-primary me-2" onclick="editVehicle(${vehicle.id})">
+                                    <i class="bi bi-pencil"></i>
+                                </span>
+                                <span class="action-btn text-danger" onclick="confirmDelete(${vehicle.id})">
+                                    <i class="bi bi-trash"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                vehicleList.appendChild(vehicleCard);
+            });
+        }
+        
+        // Filter vehicles based on search and filters
+        function filterVehicles() {
+            const searchTerm = vehicleSearch.value.toLowerCase();
+            const statusFilterValue = statusFilter.value;
+            const typeFilterValue = typeFilter.value;
+            
+            const filtered = vehicles.filter(vehicle => {
+                const matchesSearch = 
+                    vehicle.licensePlate.toLowerCase().includes(searchTerm) ||
+                    vehicle.make.toLowerCase().includes(searchTerm) ||
+                    vehicle.model.toLowerCase().includes(searchTerm) ||
+                    vehicle.vin.toLowerCase().includes(searchTerm);
+                
+                const matchesStatus = statusFilterValue === 'all' || vehicle.status === statusFilterValue;
+                const matchesType = typeFilterValue === 'all' || vehicle.type === typeFilterValue;
+                
+                return matchesSearch && matchesStatus && matchesType;
+            });
+            
+            renderVehicles(filtered);
+        }
+        
+        // Get status badge color
+        function getStatusColor(status) {
+            switch(status) {
+                case 'active': return 'success';
+                case 'maintenance': return 'warning';
+                case 'inactive': return 'danger';
+                default: return 'secondary';
+            }
+        }
+        
+        // Edit vehicle
+        function editVehicle(id) {
+            const vehicle = vehicles.find(v => v.id === id);
+            if (!vehicle) return;
+            
+            currentEditingVehicle = vehicle;
+            
+            // Populate the edit form
+            document.getElementById('editVehicleForm').innerHTML = `
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editLicensePlate" class="form-label">License Plate</label>
+                        <input type="text" class="form-control" id="editLicensePlate" value="${vehicle.licensePlate}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="editMake" class="form-label">Make</label>
+                        <input type="text" class="form-control" id="editMake" value="${vehicle.make}" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editModel" class="form-label">Model</label>
+                        <input type="text" class="form-control" id="editModel" value="${vehicle.model}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="editYear" class="form-label">Year</label>
+                        <input type="number" class="form-control" id="editYear" value="${vehicle.year}" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="editType" class="form-label">Vehicle Type</label>
+                        <select class="form-select" id="editType" required>
+                            <option value="car" ${vehicle.type === 'car' ? 'selected' : ''}>Car</option>
+                            <option value="truck" ${vehicle.type === 'truck' ? 'selected' : ''}>Truck</option>
+                            <option value="van" ${vehicle.type === 'van' ? 'selected' : ''}>Van</option>
+                            <option value="suv" ${vehicle.type === 'suv' ? 'selected' : ''}>SUV</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="editOdometer" class="form-label">Odometer (km)</label>
+                        <input type="number" class="form-control" id="editOdometer" value="${vehicle.odometer}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editStatus" required>
+                            <option value="active" ${vehicle.status === 'active' ? 'selected' : ''}>Active</option>
+                            <option value="maintenance" ${vehicle.status === 'maintenance' ? 'selected' : ''}>Maintenance</option>
+                            <option value="inactive" ${vehicle.status === 'inactive' ? 'selected' : ''}>Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="editNotes" class="form-label">Notes</label>
+                    <textarea class="form-control" id="editNotes" rows="3">${vehicle.notes || ''}</textarea>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="editVin" class="form-label">VIN</label>
+                        <input type="text" class="form-control" id="editVin" value="${vehicle.vin || ''}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="editColor" class="form-label">Color</label>
+                        <input type="text" class="form-control" id="editColor" value="${vehicle.color || ''}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="editVehicleImage" class="form-label">Vehicle Image</label>
+                    <input class="form-control" type="file" id="editVehicleImage">
+                    <small class="text-muted">Current image preview:</small>
+                    <div class="mt-2">
+                        <img src="${vehicle.imageUrl}" alt="Current vehicle image" class="img-thumbnail" style="max-height: 150px;">
+                    </div>
+                </div>
+            `;
+            
+            // Show the modal
+            const editModal = new bootstrap.Modal(document.getElementById('editVehicleModal'));
+            editModal.show();
+        }
+        
+        // Confirm vehicle deletion
+        function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete this vehicle? This action cannot be undone.')) {
+                deleteVehicle(id);
+            }
+        }
+        
+        // Delete vehicle
+        function deleteVehicle(id) {
+            const index = vehicles.findIndex(v => v.id === id);
+            if (index !== -1) {
+                vehicles.splice(index, 1);
+                filterVehicles();
+                
+                if (currentEditingVehicle && currentEditingVehicle.id === id) {
+                    const editModal = bootstrap.Modal.getInstance(document.getElementById('editVehicleModal'));
+                    editModal.hide();
+                }
+                
+                // Show success message (in a real app, this would be a toast or notification)
+                alert('Vehicle deleted successfully');
+            }
+        }
+        
+        // Save new vehicle
+        function saveVehicle() {
+            const licensePlate = document.getElementById('licensePlate').value;
+            const make = document.getElementById('make').value;
+            const model = document.getElementById('model').value;
+            const year = document.getElementById('year').value;
+            const type = document.getElementById('type').value;
+            const odometer = document.getElementById('odometer').value;
+            const status = document.getElementById('status').value;
+            const vin = document.getElementById('vin').value;
+            const color = document.getElementById('color').value;
+            const notes = document.getElementById('notes').value;
+            const imageFile = document.getElementById('vehicleImage').files[0];
+            
+            // Basic validation
+            if (!licensePlate || !make || !model || !year || !type || !odometer || !status) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Create new vehicle (in a real app, this would be saved to a database)
+            const newVehicle = {
+                id: vehicles.length > 0 ? Math.max(...vehicles.map(v => v.id)) + 1 : 1,
+                licensePlate,
+                make,
+                model,
+                year: parseInt(year),
+                type,
+                odometer: parseInt(odometer),
+                status,
+                vin,
+                color,
+                notes,
+                imageUrl: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d964da33-15a1-4d24-936f-a2e9ca88f5d3.png" + encodeURIComponent(`${make} ${model}`)
+            };
+            
+            vehicles.push(newVehicle);
+            
+            // Reset form and hide modal
+            document.getElementById('vehicleForm').reset();
+            const addModal = bootstrap.Modal.getInstance(document.getElementById('addVehicleModal'));
+            addModal.hide();
+            
+            // Refresh vehicle list
+            filterVehicles();
+            
+            // Show success message
+            alert('Vehicle added successfully');
+        }
+        
+        // Update existing vehicle
+        function updateVehicle() {
+            if (!currentEditingVehicle) return;
+            
+            const licensePlate = document.getElementById('editLicensePlate').value;
+            const make = document.getElementById('editMake').value;
+            const model = document.getElementById('editModel').value;
+            const year = document.getElementById('editYear').value;
+            const type = document.getElementById('editType').value;
+            const odometer = document.getElementById('editOdometer').value;
+            const status = document.getElementById('editStatus').value;
+            const vin = document.getElementById('editVin').value;
+            const color = document.getElementById('editColor').value;
+            const notes = document.getElementById('editNotes').value;
+            const imageFile = document.getElementById('editVehicleImage').files[0];
+            
+            // Basic validation
+            if (!licensePlate || !make || !model || !year || !type || !odometer || !status) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Update vehicle (in a real app, this would update a database record)
+            const vehicle = vehicles.find(v => v.id === currentEditingVehicle.id);
+            if (vehicle) {
+                vehicle.licensePlate = licensePlate;
+                vehicle.make = make;
+                vehicle.model = model;
+                vehicle.year = parseInt(year);
+                vehicle.type = type;
+                vehicle.odometer = parseInt(odometer);
+                vehicle.status = status;
+                vehicle.vin = vin;
+                vehicle.color = color;
+                vehicle.notes = notes;
+                
+                // In a real app, you would handle the image upload here
+                // For this example, we'll just keep the existing image
+                
+                // Reset current editing vehicle
+                currentEditingVehicle = null;
+                
+                // Hide modal
+                const editModal = bootstrap.Modal.getInstance(document.getElementById('editVehicleModal'));
+                editModal.hide();
+                
+                // Refresh vehicle list
+                filterVehicles();
+                
+                // Show success message
+                alert('Vehicle updated successfully');
+            }
+        }
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html>
+
